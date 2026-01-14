@@ -1,254 +1,400 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
-import { ArrowRight, Sparkles, Zap, Shield, Brain, Calendar, Mail, MessageSquare } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import {
+    Brain, Zap, Shield, Clock, Mail, Calendar,
+    ArrowRight, Play, Check, ChevronRight, Star,
+    Twitter, Github, Linkedin
+} from 'lucide-react';
+import { AnimatedBackground } from '../components/AnimatedBackground';
+import { GlassCard } from '../components/GlassCard';
+import { FeatureCard } from '../components/FeatureCard';
+import { PricingCard } from '../components/PricingCard';
+import { TestimonialCard } from '../components/TestimonialCard';
+import { DarkModeToggle } from '../components/DarkModeToggle';
 
 export default function LandingPage() {
     const navigate = useNavigate();
-    const [activeFeature, setActiveFeature] = useState(0);
 
     const features = [
         {
             icon: Brain,
-            title: "AI-Powered Automation",
-            description: "Natural language commands that understand context and intent",
-            color: "from-purple-500 to-pink-500"
+            title: "AI-Powered Intelligence",
+            description: "Advanced AI that understands context and learns from your preferences to deliver personalized automation"
+        },
+        {
+            icon: Zap,
+            title: "Lightning Fast Automation",
+            description: "Execute complex workflows in seconds with our optimized AI engine and smart task processing"
+        },
+        {
+            icon: Shield,
+            title: "Enterprise Security",
+            description: "Bank-level encryption and security protocols to keep your data safe and private"
+        },
+        {
+            icon: Clock,
+            title: "24/7 Availability",
+            description: "Your AI assistant never sleeps, working round the clock to keep you productive"
         },
         {
             icon: Mail,
             title: "Smart Email Management",
-            description: "Draft, send, and manage emails with AI assistance",
-            color: "from-blue-500 to-cyan-500"
+            description: "AI-powered email drafting, scheduling, and intelligent response suggestions"
         },
         {
             icon: Calendar,
             title: "Intelligent Scheduling",
-            description: "Automatic conflict detection and smart meeting suggestions",
-            color: "from-green-500 to-emerald-500"
-        },
-        {
-            icon: MessageSquare,
-            title: "Interview Simulator",
-            description: "AI-powered interview prep with real-time feedback",
-            color: "from-orange-500 to-red-500"
+            description: "Automatic conflict detection, smart meeting suggestions, and calendar optimization"
         }
     ];
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveFeature((prev) => (prev + 1) % features.length);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, []);
+    const pricingTiers = [
+        {
+            tier: "Free",
+            price: "$0",
+            period: "month",
+            features: [
+                "5 AI commands per day",
+                "Basic email automation",
+                "Calendar integration",
+                "Community support",
+                "1 user"
+            ]
+        },
+        {
+            tier: "Pro",
+            price: "$29",
+            period: "month",
+            popular: true,
+            features: [
+                "Unlimited AI commands",
+                "Advanced email automation",
+                "Priority calendar scheduling",
+                "Interview simulator access",
+                "Priority support",
+                "Up to 5 users",
+                "Custom workflows",
+                "API access"
+            ]
+        },
+        {
+            tier: "Enterprise",
+            price: "Custom",
+            period: null,
+            features: [
+                "Everything in Pro",
+                "Dedicated AI instance",
+                "Custom integrations",
+                "24/7 phone support",
+                "Unlimited users",
+                "SLA guarantee",
+                "On-premise deployment",
+                "Custom training"
+            ]
+        }
+    ];
+
+    const testimonials = [
+        {
+            name: "Sarah Chen",
+            role: "Product Manager",
+            company: "TechCorp",
+            content: "This AI platform has transformed how our team works. We've saved 15+ hours per week on routine tasks and can focus on what really matters.",
+            rating: 5
+        },
+        {
+            name: "Michael Rodriguez",
+            role: "CEO",
+            company: "StartupXYZ",
+            content: "The interview simulator alone is worth the subscription. Our hiring process is now 3x faster with better candidate quality.",
+            rating: 5
+        },
+        {
+            name: "Emily Watson",
+            role: "Operations Director",
+            company: "GlobalCo",
+            content: "Incredible automation capabilities. The AI understands context better than any tool we've used. Highly recommended!",
+            rating: 5
+        }
+    ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-            {/* Animated background */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -inset-[10px] opacity-50">
-                    {[...Array(20)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute h-px w-px bg-white rounded-full"
-                            animate={{
-                                x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-                                y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-                                opacity: [0, 1, 0],
-                            }}
-                            transition={{
-                                duration: Math.random() * 10 + 10,
-                                repeat: Infinity,
-                                ease: "linear"
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
+        <div className="min-h-screen bg-black text-white overflow-x-hidden">
+            {/* Animated Background */}
+            <AnimatedBackground />
 
-            {/* Header */}
-            <header className="relative z-10 border-b border-white/10 backdrop-blur-sm">
-                <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                    <motion.div
-                        className="flex items-center gap-2"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                    >
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                            <Sparkles className="w-6 h-6 text-white" />
-                        </div>
-                        <span className="text-2xl font-bold text-white">AI Agent</span>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                    >
-                        <SignedOut>
-                            <SignInButton mode="modal">
-                                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                                    Sign In
-                                </Button>
-                            </SignInButton>
-                        </SignedOut>
-                        <SignedIn>
-                            <div className="flex items-center gap-4">
-                                <Button onClick={() => navigate('/dashboard')} className="bg-white text-purple-900 hover:bg-white/90">
-                                    Go to Dashboard
-                                </Button>
-                                <UserButton afterSignOutUrl="/" />
+            {/* Navigation */}
+            <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/50 border-b border-white/10">
+                <div className="max-w-7xl mx-auto px-6 py-4">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+                                <Brain className="w-6 h-6 text-white" />
                             </div>
-                        </SignedIn>
-                    </motion.div>
+                            <span className="text-xl font-bold">NEXUS.AI</span>
+                        </div>
+
+                        <div className="hidden md:flex items-center gap-8">
+                            <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
+                            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                            <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Testimonials</a>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                            <DarkModeToggle />
+                            <SignedOut>
+                                <SignInButton mode="modal">
+                                    <button className="px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 transition-all">
+                                        Sign In
+                                    </button>
+                                </SignInButton>
+                            </SignedOut>
+                            <SignedIn>
+                                <button
+                                    onClick={() => navigate('/dashboard')}
+                                    className="px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+                                >
+                                    Dashboard
+                                </button>
+                                <UserButton afterSignOutUrl="/" />
+                            </SignedIn>
+                        </div>
+                    </div>
                 </div>
-            </header>
+            </nav>
 
             {/* Hero Section */}
-            <section className="relative z-10 container mx-auto px-4 py-20">
-                <div className="text-center max-w-4xl mx-auto">
+            <section className="pt-32 pb-20 px-6">
+                <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-center mb-16"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
-                            <Zap className="w-4 h-4 text-yellow-400" />
-                            <span className="text-sm text-white">Powered by Advanced AI</span>
+                        <div className="inline-block mb-4 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+                            <span className="text-sm text-gray-300">✨ AI-Powered Automation Platform</span>
+                        </div>
+
+                        <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                            Work Smarter with
+                            <br />
+                            AI Automation
+                        </h1>
+
+                        <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                            Your intelligent automation companion. Transform workflows with AI-powered efficiency.
+                        </p>
+
+                        <div className="flex flex-wrap items-center justify-center gap-4">
+                            <SignedOut>
+                                <SignInButton mode="modal">
+                                    <button className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2 font-semibold">
+                                        Get Started Free
+                                        <ArrowRight className="w-5 h-5" />
+                                    </button>
+                                </SignInButton>
+                            </SignedOut>
+                            <SignedIn>
+                                <button
+                                    onClick={() => navigate('/dashboard')}
+                                    className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2 font-semibold"
+                                >
+                                    Go to Dashboard
+                                    <ArrowRight className="w-5 h-5" />
+                                </button>
+                            </SignedIn>
+
+                            <button className="px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 transition-all flex items-center gap-2 font-semibold">
+                                <Play className="w-5 h-5" />
+                                Watch Demo
+                            </button>
                         </div>
                     </motion.div>
 
-                    <motion.h1
-                        className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                    >
-                        Your AI-Powered
-                        <br />
-                        <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-                            Automation Assistant
-                        </span>
-                    </motion.h1>
-
-                    <motion.p
-                        className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                    >
-                        Transform your productivity with intelligent automation.
-                        Manage emails, schedule meetings, and prepare for interviews—all through natural language.
-                    </motion.p>
-
+                    {/* Hero Glass Card */}
                     <motion.div
-                        className="flex flex-col sm:flex-row gap-4 justify-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
                     >
+                        <GlassCard className="p-8">
+                            <div className="grid md:grid-cols-3 gap-8">
+                                <div className="text-center">
+                                    <div className="text-4xl font-bold text-white mb-2">10k+</div>
+                                    <div className="text-gray-400">Active Users</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-4xl font-bold text-white mb-2">1M+</div>
+                                    <div className="text-gray-400">Tasks Automated</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-4xl font-bold text-white mb-2">99.9%</div>
+                                    <div className="text-gray-400">Uptime</div>
+                                </div>
+                            </div>
+                        </GlassCard>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Features Section */}
+            <section id="features" className="py-20 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Powerful Features</h2>
+                        <p className="text-xl text-gray-400">Everything you need to automate your workflow</p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {features.map((feature, index) => (
+                            <FeatureCard key={index} {...feature} index={index} />
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Pricing Section */}
+            <section id="pricing" className="py-20 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
+                        <p className="text-xl text-gray-400">Choose the plan that fits your needs</p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        {pricingTiers.map((tier, index) => (
+                            <PricingCard key={index} {...tier} index={index} />
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section id="testimonials" className="py-20 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Teams Worldwide</h2>
+                        <p className="text-xl text-gray-400">See what our customers have to say</p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {testimonials.map((testimonial, index) => (
+                            <TestimonialCard key={index} {...testimonial} />
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-20 px-6">
+                <div className="max-w-4xl mx-auto">
+                    <GlassCard className="text-center p-12">
+                        <h2 className="text-4xl font-bold mb-4">Ready to Transform Your Workflow?</h2>
+                        <p className="text-xl text-gray-400 mb-8">
+                            Join thousands of professionals using AI to work smarter, not harder.
+                        </p>
                         <SignedOut>
                             <SignInButton mode="modal">
-                                <Button size="lg" className="bg-white text-purple-900 hover:bg-white/90 text-lg px-8">
-                                    Get Started Free
-                                    <ArrowRight className="ml-2 w-5 h-5" />
-                                </Button>
+                                <button className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2 font-semibold mx-auto">
+                                    Start Free Trial
+                                    <ArrowRight className="w-5 h-5" />
+                                </button>
                             </SignInButton>
                         </SignedOut>
                         <SignedIn>
-                            <Button
-                                size="lg"
+                            <button
                                 onClick={() => navigate('/dashboard')}
-                                className="bg-white text-purple-900 hover:bg-white/90 text-lg px-8"
+                                className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2 font-semibold mx-auto"
                             >
                                 Go to Dashboard
-                                <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
+                                <ArrowRight className="w-5 h-5" />
+                            </button>
                         </SignedIn>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            onClick={() => navigate('/interview')}
-                            className="border-white/20 text-white hover:bg-white/10 text-lg px-8"
-                        >
-                            Try Interview Simulator
-                        </Button>
-                    </motion.div>
+                    </GlassCard>
                 </div>
-
-                {/* Feature Cards */}
-                <motion.div
-                    className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20"
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                    {features.map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                            transition={{ type: "spring", stiffness: 300 }}
-                        >
-                            <Card className={cn(
-                                "bg-white/5 backdrop-blur-sm border-white/10 hover:border-white/20 transition-all cursor-pointer",
-                                activeFeature === index && "border-white/30 shadow-lg shadow-purple-500/20"
-                            )}>
-                                <CardHeader>
-                                    <div className={cn(
-                                        "w-12 h-12 rounded-lg bg-gradient-to-br flex items-center justify-center mb-4",
-                                        feature.color
-                                    )}>
-                                        <feature.icon className="w-6 h-6 text-white" />
-                                    </div>
-                                    <CardTitle className="text-white">{feature.title}</CardTitle>
-                                    <CardDescription className="text-gray-400">
-                                        {feature.description}
-                                    </CardDescription>
-                                </CardHeader>
-                            </Card>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </section>
-
-            {/* Stats Section */}
-            <section className="relative z-10 container mx-auto px-4 py-20">
-                <motion.div
-                    className="grid md:grid-cols-3 gap-8 text-center"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                >
-                    {[
-                        { value: "10+", label: "AI Tools" },
-                        { value: "100%", label: "Automated" },
-                        { value: "24/7", label: "Available" }
-                    ].map((stat, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <div className="text-5xl font-bold text-white mb-2">{stat.value}</div>
-                            <div className="text-gray-400">{stat.label}</div>
-                        </motion.div>
-                    ))}
-                </motion.div>
             </section>
 
             {/* Footer */}
-            <footer className="relative z-10 border-t border-white/10 backdrop-blur-sm">
-                <div className="container mx-auto px-4 py-8 text-center text-gray-400">
-                    <p>© 2026 AI Agent Automation Platform. Built with ❤️ using modern AI.</p>
+            <footer className="border-t border-white/10 py-12 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-4 gap-8 mb-8">
+                        <div>
+                            <div className="flex items-center gap-2 mb-4">
+                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+                                    <Brain className="w-5 h-5 text-white" />
+                                </div>
+                                <span className="text-lg font-bold">NEXUS.AI</span>
+                            </div>
+                            <p className="text-gray-400 text-sm">
+                                Next-generation AI automation platform.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold mb-4">Product</h3>
+                            <ul className="space-y-2 text-gray-400 text-sm">
+                                <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
+                                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
+                                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+                                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold mb-4">Company</h3>
+                            <ul className="space-y-2 text-gray-400 text-sm">
+                                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+                                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+                                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold mb-4">Connect</h3>
+                            <div className="flex gap-4">
+                                <a href="#" className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                                    <Twitter className="w-5 h-5" />
+                                </a>
+                                <a href="#" className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                                    <Github className="w-5 h-5" />
+                                </a>
+                                <a href="#" className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                                    <Linkedin className="w-5 h-5" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <p className="text-gray-400 text-sm">
+                            © 2024 NEXUS.AI. All rights reserved.
+                        </p>
+                        <div className="flex gap-6 text-gray-400 text-sm">
+                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                        </div>
+                    </div>
                 </div>
             </footer>
         </div>
     );
-}
-
-function cn(...classes) {
-    return classes.filter(Boolean).join(' ');
 }

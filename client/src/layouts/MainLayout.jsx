@@ -34,7 +34,7 @@ const MainLayout = ({ children }) => {
             >
                 <div className="p-6 border-b border-border">
                     <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                        AutoAgent
+                        NEXUS.AI
                     </h1>
                 </div>
 
