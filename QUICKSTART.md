@@ -13,7 +13,6 @@
 ```env
 PORT=5000
 NODE_ENV=development
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ai-automation
 CLERK_PUBLISHABLE_KEY=pk_test_...
 CLERK_SECRET_KEY=sk_test_...
 AI_SERVICE_URL=http://localhost:8000
