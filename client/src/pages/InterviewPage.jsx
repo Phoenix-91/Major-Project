@@ -40,6 +40,11 @@ export default function InterviewPage() {
     const [questionCount, setQuestionCount] = useState(0);
     const messagesEndRef = useRef(null);
 
+    // Speech recognition state
+    const [isListening, setIsListening] = useState(false);
+    const [recognition, setRecognition] = useState(null);
+    const [transcript, setTranscript] = useState('');
+
     // Initialize Camera
     useEffect(() => {
         if (sessionState === 'active' || sessionState === 'setup') {
@@ -47,6 +52,49 @@ export default function InterviewPage() {
         }
         return () => stopCamera();
     }, [sessionState]);
+
+    // Initialize Speech Recognition
+    useEffect(() => {
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognitionInstance = new SpeechRecognition();
+
+            recognitionInstance.continuous = true;
+            recognitionInstance.interimResults = true;
+            recognitionInstance.lang = 'en-US';
+
+            recognitionInstance.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript + ' ';
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+
+                if (finalTranscript) {
+                    setUserResponse(prev => prev + finalTranscript);
+                }
+                setTranscript(interimTranscript);
+            };
+
+            recognitionInstance.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                setIsListening(false);
+            };
+
+            recognitionInstance.onend = () => {
+                setIsListening(false);
+                setTranscript('');
+            };
+
+            setRecognition(recognitionInstance);
+        }
+    }, []);
 
     // Auto-scroll chat
     useEffect(() => {
@@ -172,6 +220,11 @@ export default function InterviewPage() {
     const submitResponse = async () => {
         if (!userResponse.trim()) return;
 
+        // Stop listening when submitting
+        if (isListening && recognition) {
+            recognition.stop();
+        }
+
         const userMsg = { role: 'user', text: userResponse, timestamp: new Date() };
         setMessages(prev => [...prev, userMsg]);
 
@@ -197,8 +250,29 @@ export default function InterviewPage() {
         }
     };
 
+    const toggleMicrophone = () => {
+        if (!recognition) {
+            alert('Speech recognition is not supported in your browser. Please use Chrome or Edge.');
+            return;
+        }
+
+        if (isListening) {
+            recognition.stop();
+            setIsListening(false);
+        } else {
+            recognition.start();
+            setIsListening(true);
+        }
+    };
+
     const endInterview = async () => {
         window.speechSynthesis.cancel();
+
+        // Stop speech recognition
+        if (isListening && recognition) {
+            recognition.stop();
+        }
+
         setSessionState('review');
         stopCamera();
 
@@ -396,14 +470,28 @@ export default function InterviewPage() {
                     {/* Response Input & Controls */}
                     <div className="bg-card border border-border rounded-xl p-4 space-y-3">
                         <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={userResponse}
-                                onChange={(e) => setUserResponse(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && submitResponse()}
-                                placeholder="Type your response here..."
-                                className="flex-1 px-4 py-2 border border-border rounded-lg bg-background"
-                            />
+                            <div className="flex-1 relative">
+                                <input
+                                    type="text"
+                                    value={userResponse}
+                                    onChange={(e) => setUserResponse(e.target.value)}
+                                    onKeyPress={(e) => e.key === 'Enter' && submitResponse()}
+                                    placeholder={isListening ? "Listening..." : "Type your response here or use voice input..."}
+                                    className="w-full px-4 py-2 border border-border rounded-lg bg-background pr-12"
+                                />
+                                <button
+                                    onClick={toggleMicrophone}
+                                    className={cn(
+                                        "absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full transition-all",
+                                        isListening
+                                            ? "bg-red-500 text-white animate-pulse"
+                                            : "bg-muted hover:bg-muted/80"
+                                    )}
+                                    title={isListening ? "Stop listening" : "Start voice input"}
+                                >
+                                    <Mic className={cn("w-4 h-4", isListening && "animate-pulse")} />
+                                </button>
+                            </div>
                             <button
                                 onClick={submitResponse}
                                 disabled={!userResponse.trim()}
@@ -412,7 +500,22 @@ export default function InterviewPage() {
                                 <Send className="w-4 h-4" /> Send
                             </button>
                         </div>
-                        <div className="flex justify-center">
+
+                        {/* Live transcript display */}
+                        {transcript && (
+                            <div className="px-3 py-2 bg-blue-500/10 border border-blue-500/20 rounded-lg text-sm text-blue-600">
+                                <span className="font-semibold">Listening: </span>
+                                <span className="italic">{transcript}</span>
+                            </div>
+                        )}
+
+                        <div className="flex justify-center gap-4">
+                            {isListening && (
+                                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                                    Voice input active
+                                </div>
+                            )}
                             <button
                                 onClick={endInterview}
                                 className="px-8 py-2 bg-red-600 text-white rounded-full font-bold hover:bg-red-700 transition-colors flex items-center gap-2"

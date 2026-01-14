@@ -25,10 +25,14 @@ from agents.executor import AgentSystem
 from agents.interview_agent import get_interview_agent, clear_interview_session
 from schemas.base import CommandRequest
 from memory.conversation_memory import get_memory
+from services.pattern_analyzer import router as pattern_router
 
 # Initialize Agents
 planner = PlannerAgent()
 executor = AgentSystem()
+
+# Include pattern analyzer routes
+app.include_router(pattern_router, tags=["analytics"])
 
 class CommandRequest(BaseModel):
     command: str

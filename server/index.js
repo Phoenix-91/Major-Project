@@ -26,6 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         logger.info('MongoDB connected');
+
+        // Start background scheduler
+        const scheduler = require('./services/scheduler');
+        scheduler.start();
+        logger.info('Background scheduler started');
+
         // Initialize proactive recommendation engine
         require('./services/proactiveEngine');
         logger.info('Proactive AI engine initialized');
@@ -41,6 +47,8 @@ app.use('/api/templates', require('./routes/templates'));
 app.use('/api/calendar', require('./routes/calendar'));
 app.use('/api/recommendations', require('./routes/recommendations'));
 app.use('/api/activity', require('./routes/activity'));
+app.use('/api/insights', require('./routes/insights'));
+app.use('/api/preferences', require('./routes/preferences'));
 
 app.get('/', (req, res) => {
     res.json({
@@ -53,7 +61,8 @@ app.get('/', (req, res) => {
             '/api/emails',
             '/api/calendar',
             '/api/recommendations',
-            '/api/activity'
+            '/api/activity',
+            '/api/insights'
         ]
     });
 });
