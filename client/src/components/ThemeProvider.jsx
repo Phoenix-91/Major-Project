@@ -20,14 +20,25 @@ export const ThemeProvider = ({ children }) => {
         // Load theme from localStorage
         const savedTheme = localStorage.getItem('theme') || 'dark';
         setTheme(savedTheme);
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        applyTheme(savedTheme);
     }, []);
+
+    const applyTheme = (newTheme) => {
+        document.documentElement.setAttribute('data-theme', newTheme);
+        if (newTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+        } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+        }
+    };
 
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
         localStorage.setItem('theme', newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
+        applyTheme(newTheme);
     };
 
     return (

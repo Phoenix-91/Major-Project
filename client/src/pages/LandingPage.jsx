@@ -120,25 +120,25 @@ export default function LandingPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white overflow-x-hidden">
+        <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
             {/* Animated Background */}
             <AnimatedBackground />
 
             {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/50 border-b border-white/10">
+            <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                                <Brain className="w-6 h-6 text-white" />
+                                <Brain className="w-6 h-6 text-foreground" />
                             </div>
                             <span className="text-xl font-bold">NEXUS.AI</span>
                         </div>
 
                         <div className="hidden md:flex items-center gap-8">
-                            <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
-                            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
-                            <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Testimonials</a>
+                            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
+                            <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+                            <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Testimonials</a>
                         </div>
 
                         <div className="flex items-center gap-4">
@@ -174,7 +174,7 @@ export default function LandingPage() {
                         className="text-center mb-16"
                     >
                         <div className="inline-block mb-4 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-                            <span className="text-sm text-gray-300">✨ AI-Powered Automation Platform</span>
+                            <span className="text-sm text-muted-foreground">✨ AI-Powered Automation Platform</span>
                         </div>
 
                         <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
@@ -183,7 +183,7 @@ export default function LandingPage() {
                             AI Automation
                         </h1>
 
-                        <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                        <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                             Your intelligent automation companion. Transform workflows with AI-powered efficiency.
                         </p>
 
@@ -222,16 +222,16 @@ export default function LandingPage() {
                         <GlassCard className="p-8">
                             <div className="grid md:grid-cols-3 gap-8">
                                 <div className="text-center">
-                                    <div className="text-4xl font-bold text-white mb-2">10k+</div>
-                                    <div className="text-gray-400">Active Users</div>
+                                    <div className="text-4xl font-bold text-foreground mb-2">10k+</div>
+                                    <div className="text-muted-foreground">Active Users</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-4xl font-bold text-white mb-2">1M+</div>
-                                    <div className="text-gray-400">Tasks Automated</div>
+                                    <div className="text-4xl font-bold text-foreground mb-2">1M+</div>
+                                    <div className="text-muted-foreground">Tasks Automated</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-4xl font-bold text-white mb-2">99.9%</div>
-                                    <div className="text-gray-400">Uptime</div>
+                                    <div className="text-4xl font-bold text-foreground mb-2">99.9%</div>
+                                    <div className="text-muted-foreground">Uptime</div>
                                 </div>
                             </div>
                         </GlassCard>
@@ -249,7 +249,7 @@ export default function LandingPage() {
                         className="text-center mb-16"
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-4">Powerful Features</h2>
-                        <p className="text-xl text-gray-400">Everything you need to automate your workflow</p>
+                        <p className="text-xl text-muted-foreground">Everything you need to automate your workflow</p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -270,7 +270,7 @@ export default function LandingPage() {
                         className="text-center mb-16"
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
-                        <p className="text-xl text-gray-400">Choose the plan that fits your needs</p>
+                        <p className="text-xl text-muted-foreground">Choose the plan that fits your needs</p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -291,7 +291,7 @@ export default function LandingPage() {
                         className="text-center mb-16"
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Teams Worldwide</h2>
-                        <p className="text-xl text-gray-400">See what our customers have to say</p>
+                        <p className="text-xl text-muted-foreground">See what our customers have to say</p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-8">
@@ -307,7 +307,7 @@ export default function LandingPage() {
                 <div className="max-w-4xl mx-auto">
                     <GlassCard className="text-center p-12">
                         <h2 className="text-4xl font-bold mb-4">Ready to Transform Your Workflow?</h2>
-                        <p className="text-xl text-gray-400 mb-8">
+                        <p className="text-xl text-muted-foreground mb-8">
                             Join thousands of professionals using AI to work smarter, not harder.
                         </p>
                         <SignedOut>
@@ -338,32 +338,32 @@ export default function LandingPage() {
                         <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                                    <Brain className="w-5 h-5 text-white" />
+                                    <Brain className="w-5 h-5 text-foreground" />
                                 </div>
                                 <span className="text-lg font-bold">NEXUS.AI</span>
                             </div>
-                            <p className="text-gray-400 text-sm">
+                            <p className="text-muted-foreground text-sm">
                                 Next-generation AI automation platform.
                             </p>
                         </div>
 
                         <div>
                             <h3 className="font-semibold mb-4">Product</h3>
-                            <ul className="space-y-2 text-gray-400 text-sm">
-                                <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
-                                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                            <ul className="space-y-2 text-muted-foreground text-sm">
+                                <li><a href="#features" className="hover:text-foreground transition-colors">Features</a></li>
+                                <li><a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a></li>
+                                <li><a href="#" className="hover:text-foreground transition-colors">API</a></li>
+                                <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 className="font-semibold mb-4">Company</h3>
-                            <ul className="space-y-2 text-gray-400 text-sm">
-                                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                            <ul className="space-y-2 text-muted-foreground text-sm">
+                                <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
+                                <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
+                                <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
+                                <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
                             </ul>
                         </div>
 
@@ -384,13 +384,13 @@ export default function LandingPage() {
                     </div>
 
                     <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-muted-foreground text-sm">
                             © 2024 NEXUS.AI. All rights reserved.
                         </p>
-                        <div className="flex gap-6 text-gray-400 text-sm">
-                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                        <div className="flex gap-6 text-muted-foreground text-sm">
+                            <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
+                            <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
+                            <a href="#" className="hover:text-foreground transition-colors">Cookie Policy</a>
                         </div>
                     </div>
                 </div>

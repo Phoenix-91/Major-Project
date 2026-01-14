@@ -12,10 +12,10 @@ export const FeatureCard = ({ icon: Icon, title, description, index }) => {
             <GlassCard className="h-full">
                 <div className="flex flex-col items-center text-center space-y-4">
                     <div className="p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
-                        <Icon className="w-8 h-8 text-white" />
+                        <Icon className="w-8 h-8 text-foreground" />
                     </div>
-                    <h3 className="text-xl font-bold text-white">{title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+                    <h3 className="text-xl font-bold text-foreground">{title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
                 </div>
             </GlassCard>
         </motion.div>

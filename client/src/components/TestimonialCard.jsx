@@ -9,7 +9,7 @@ export const TestimonialCard = ({ name, role, company, content, rating, avatar }
                 <Quote className="w-8 h-8 text-white/20 mb-4" />
 
                 {/* Content */}
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 flex-1">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
                     "{content}"
                 </p>
 
@@ -30,8 +30,8 @@ export const TestimonialCard = ({ name, role, company, content, rating, avatar }
                         {avatar || name.charAt(0)}
                     </div>
                     <div>
-                        <p className="text-white font-semibold">{name}</p>
-                        <p className="text-gray-400 text-sm">{role} at {company}</p>
+                        <p className="text-foreground font-semibold">{name}</p>
+                        <p className="text-muted-foreground text-sm">{role} at {company}</p>
                     </div>
                 </div>
             </div>
