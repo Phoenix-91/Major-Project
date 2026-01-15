@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import {
     Sparkles, TrendingUp, Zap, Clock, Mail, Calendar,
     MessageSquare, FileText, Settings, BarChart3
@@ -21,6 +22,7 @@ const COMMAND_SUGGESTIONS = [
 
 export default function Dashboard() {
     const [chatInput, setChatInput] = useState('');
+    const navigate = useNavigate();
 
     const stats = [
         { icon: Zap, label: 'Total Tasks', value: '142', trend: 12 },
@@ -30,10 +32,30 @@ export default function Dashboard() {
     ];
 
     const quickActions = [
-        { icon: Mail, title: 'Email Automation', description: 'Draft and send emails' },
-        { icon: Calendar, title: 'Schedule Meeting', description: 'Find time and book' },
-        { icon: MessageSquare, title: 'Interview Prep', description: 'Practice with AI' },
-        { icon: FileText, title: 'Generate Report', description: 'Create documents' }
+        {
+            icon: Mail,
+            title: 'Email Automation',
+            description: 'Draft and send emails',
+            onClick: () => console.log('Email automation - feature coming soon')
+        },
+        {
+            icon: Calendar,
+            title: 'Schedule Meeting',
+            description: 'Find time and book',
+            onClick: () => console.log('Schedule meeting - feature coming soon')
+        },
+        {
+            icon: MessageSquare,
+            title: 'Interview Prep',
+            description: 'Practice with AI',
+            onClick: () => navigate('/interview')
+        },
+        {
+            icon: FileText,
+            title: 'Generate Report',
+            description: 'Create documents',
+            onClick: () => console.log('Generate report - feature coming soon')
+        }
     ];
 
     return (
@@ -63,6 +85,7 @@ export default function Dashboard() {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={() => alert('Settings panel coming soon!')}
                         className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
                     >
                         <Settings className="w-5 h-5 text-muted-foreground" />

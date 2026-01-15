@@ -140,10 +140,20 @@ export default function InterviewPage() {
                                         <select
                                             value={jobRole}
                                             onChange={(e) => setJobRole(e.target.value)}
-                                            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-foreground"
+                                            className="w-full px-4 py-3 rounded-lg bg-white/5 backdrop-blur-md border border-white/10 text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                                            style={{
+                                                backgroundImage: 'none',
+                                                appearance: 'none',
+                                                backgroundPosition: 'right 0.5rem center',
+                                                backgroundRepeat: 'no-repeat',
+                                                backgroundSize: '1.5em 1.5em',
+                                                paddingRight: '2.5rem'
+                                            }}
                                         >
                                             {JOB_ROLES.map(role => (
-                                                <option key={role} value={role}>{role}</option>
+                                                <option key={role} value={role} className="bg-gray-900 text-white">
+                                                    {role}
+                                                </option>
                                             ))}
                                         </select>
                                     </div>
@@ -156,7 +166,7 @@ export default function InterviewPage() {
                                                 value={customJobRole}
                                                 onChange={(e) => setCustomJobRole(e.target.value)}
                                                 placeholder="Enter job role..."
-                                                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-foreground"
+                                                className="w-full px-4 py-3 rounded-lg bg-white/5 backdrop-blur-md border border-white/10 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
                                             />
                                         </div>
                                     )}
@@ -263,7 +273,7 @@ export default function InterviewPage() {
                                         onChange={(e) => setUserResponse(e.target.value)}
                                         onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && submitResponse()}
                                         placeholder="Type your response..."
-                                        className="flex-1 px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-foreground resize-none"
+                                        className="flex-1 px-4 py-3 rounded-lg bg-white/5 backdrop-blur-md border border-white/10 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all resize-none"
                                         rows={3}
                                     />
 
