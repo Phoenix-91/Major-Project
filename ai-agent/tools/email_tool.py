@@ -51,13 +51,13 @@ def send_email(recipient: str, subject: str, body: str) -> str:
 @tool
 def detect_tone(text: str) -> str:
     """Analyzes the tone of the provided text."""
-    from langchain_groq import ChatGroq
+    from langchain_google_genai import ChatGoogleGenerativeAI
     from langchain_core.prompts import ChatPromptTemplate
     
-    llm = ChatGroq(
-        model="llama3-70b-8192",
-        temperature=0,
-        api_key=os.getenv("GROQ_API_KEY")
+    llm = ChatGoogleGenerativeAI(
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+        model="gemini-1.5-flash",
+        temperature=0
     )
     
     prompt = ChatPromptTemplate.from_messages([
@@ -74,13 +74,13 @@ def draft_email(recipient: str, subject: str, context: str, tone: str = "profess
     """
     Drafts an email using AI based on context and desired tone.
     """
-    from langchain_groq import ChatGroq
+    from langchain_google_genai import ChatGoogleGenerativeAI
     from langchain_core.prompts import ChatPromptTemplate
     
-    llm = ChatGroq(
-        model="llama3-70b-8192",
-        temperature=0.7,
-        api_key=os.getenv("GROQ_API_KEY")
+    llm = ChatGoogleGenerativeAI(
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+        model="gemini-1.5-flash",
+        temperature=0.7
     )
     
     prompt = ChatPromptTemplate.from_messages([
@@ -106,13 +106,13 @@ def draft_email(recipient: str, subject: str, context: str, tone: str = "profess
 @tool
 def summarize_email(email_content: str) -> str:
     """Summarizes the content of an email into key points."""
-    from langchain_groq import ChatGroq
+    from langchain_google_genai import ChatGoogleGenerativeAI
     from langchain_core.prompts import ChatPromptTemplate
     
-    llm = ChatGroq(
-        model="llama3-70b-8192",
-        temperature=0,
-        api_key=os.getenv("GROQ_API_KEY")
+    llm = ChatGoogleGenerativeAI(
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+        model="gemini-1.5-flash",
+        temperature=0
     )
     
     prompt = ChatPromptTemplate.from_messages([

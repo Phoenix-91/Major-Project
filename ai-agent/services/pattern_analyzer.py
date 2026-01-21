@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 import os
 import json
@@ -10,10 +10,10 @@ from datetime import datetime, timedelta
 router = APIRouter()
 
 # Initialize LLM
-llm = ChatGroq(
-    model="llama3-70b-8192",
-    temperature=0.7,
-    api_key=os.getenv("GROQ_API_KEY")
+llm = ChatGoogleGenerativeAI(
+    google_api_key=os.getenv("GEMINI_API_KEY"),
+    model="gemini-1.5-flash",
+    temperature=0.7
 )
 
 class PatternAnalysisRequest(BaseModel):

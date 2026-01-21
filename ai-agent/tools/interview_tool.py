@@ -1,5 +1,5 @@
 from langchain.tools import tool
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from typing import List, Dict
 import os
@@ -21,10 +21,10 @@ def generate_interview_questions(
         difficulty: Question difficulty (easy, medium, hard)
         num_questions: Number of questions to generate
     """
-    llm = ChatGroq(
-        model="llama3-70b-8192",
-        temperature=0.7,
-        api_key=os.getenv("GROQ_API_KEY")
+    llm = ChatGoogleGenerativeAI(
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+        model="gemini-1.5-flash",
+        temperature=0.7
     )
     
     prompt = ChatPromptTemplate.from_messages([
@@ -66,10 +66,10 @@ def evaluate_interview_response(
         job_role: Target job role
         resume_context: Optional resume context for evaluation
     """
-    llm = ChatGroq(
-        model="llama3-70b-8192",
-        temperature=0.3,
-        api_key=os.getenv("GROQ_API_KEY")
+    llm = ChatGoogleGenerativeAI(
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+        model="gemini-1.5-flash",
+        temperature=0.3
     )
     
     prompt = ChatPromptTemplate.from_messages([
@@ -117,10 +117,10 @@ def generate_interview_analytics(
         resume_text: Candidate's resume text
         job_role: Target job role
     """
-    llm = ChatGroq(
-        model="llama3-70b-8192",
-        temperature=0.3,
-        api_key=os.getenv("GROQ_API_KEY")
+    llm = ChatGoogleGenerativeAI(
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+        model="gemini-1.5-flash",
+        temperature=0.3
     )
     
     prompt = ChatPromptTemplate.from_messages([

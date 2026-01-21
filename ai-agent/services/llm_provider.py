@@ -1,12 +1,12 @@
 """
 Multi-LLM Provider with Automatic Fallback
-Supports: Groq (primary), Ollama (fallback), OpenAI (backup)
+Supports: Gemini (primary), Ollama (fallback), OpenAI (backup)
 """
 
 import os
 from typing import Optional, Dict, Any
 import logging
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.llms import Ollama
 from langchain_openai import ChatOpenAI
 
@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
 class MultiLLMProvider:
     """
     Manages multiple LLM providers with automatic fallback
-    Priority: Groq -> Ollama -> OpenAI
+    Priority: Gemini -> Ollama -> OpenAI
     """
     
     def __init__(self):
-        self.groq_api_key = os.getenv('GROQ_API_KEY')
+        self.gemini_api_key = os.getenv('GEMINI_API_KEY')
         self.openai_api_key = os.getenv('OPENAI_API_KEY')
         self.ollama_base_url = os.getenv('OLLAMA_BASE_URL', 'http://localhost:11434')
         
@@ -30,20 +30,19 @@ class MultiLLMProvider:
     def _initialize_providers(self):
         """Initialize all available LLM providers"""
         
-        # 1. Groq (Primary - Fast and Free)
-        if self.groq_api_key and self.groq_api_key != 'your-groq-api-key-here':
+        # 1. Gemini (Primary - Fast and Free)
+        if self.gemini_api_key and self.gemini_api_key != 'your-gemini-api-key-here':
             try:
-                self.providers['groq'] = ChatGroq(
-                    api_key=self.groq_api_key,
-                    model_name="llama-3.3-70b-versatile",  # Fast model
+                self.providers['gemini'] = ChatGoogleGenerativeAI(
+                    google_api_key=self.gemini_api_key,
+                    model="gemini-1.5-flash",  # Fast model
                     temperature=0.7,
-                    max_tokens=2048,
-                    timeout=30,
-                    max_retries=2
+                    max_output_tokens=2048,
+                    timeout=30
                 )
-                logger.info("✅ Groq LLM initialized")
+                logger.info("✅ Gemini LLM initialized")
             except Exception as e:
-                logger.warning(f"⚠️ Groq initialization failed: {e}")
+                logger.warning(f"⚠️ Gemini initialization failed: {e}")
         
         # 2. Ollama (Fallback - Local and Free)
         try:
@@ -81,7 +80,7 @@ class MultiLLMProvider:
         Get LLM with fallback support
         
         Args:
-            preferred: Preferred provider ('groq', 'ollama', 'openai')
+            preferred: Preferred provider ('gemini', 'ollama', 'openai')
         
         Returns:
             LLM instance
@@ -91,8 +90,8 @@ class MultiLLMProvider:
             logger.info(f"Using preferred provider: {preferred}")
             return self.providers[preferred]
         
-        # Fallback order: groq -> ollama -> openai
-        fallback_order = ['groq', 'ollama', 'openai']
+        # Fallback order: gemini -> ollama -> openai
+        fallback_order = ['gemini', 'ollama', 'openai']
         
         for provider in fallback_order:
             if provider in self.providers:
@@ -112,7 +111,7 @@ class MultiLLMProvider:
         Returns:
             LLM response
         """
-        fallback_order = ['groq', 'ollama', 'openai']
+        fallback_order = ['gemini', 'ollama', 'openai']
         
         # Put preferred provider first if specified
         if preferred and preferred in self.providers:

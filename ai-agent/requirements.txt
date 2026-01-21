@@ -5,7 +5,7 @@ langchain
 langchain-core
 langchain-community
 langchain-openai
-langchain-groq
+langchain-google-genai
 pydantic
 requests
 PyPDF2
