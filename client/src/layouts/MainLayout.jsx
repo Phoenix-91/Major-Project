@@ -40,16 +40,16 @@ const MainLayout = ({ children }) => {
 
                 <nav className="flex-1 p-4 space-y-2">
                     <SidebarItem
-                        icon={LayoutDashboard}
-                        label="Dashboard"
-                        href="/dashboard"
-                        active={location.pathname === '/dashboard'}
-                    />
-                    <SidebarItem
                         icon={Video}
                         label="Interview Sim"
                         href="/interview"
                         active={location.pathname === '/interview'}
+                    />
+                    <SidebarItem
+                        icon={LayoutDashboard}
+                        label="Dashboard"
+                        href="/dashboard"
+                        active={location.pathname === '/dashboard'}
                     />
                 </nav>
 
