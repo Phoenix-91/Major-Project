@@ -3,7 +3,6 @@ import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 
 // Pages
 import LandingPage from './pages/LandingPage';
-import DashboardHelper from './pages/Dashboard';
 import InterviewPage from './pages/InterviewPage';
 
 // Layouts
@@ -16,22 +15,6 @@ function App() {
       <Route path="/" element={<LandingPage />} />
 
       {/* Protected Routes */}
-      <Route
-        path="/dashboard"
-        element={
-          <>
-            <SignedIn>
-              <MainLayout>
-                <DashboardHelper />
-              </MainLayout>
-            </SignedIn>
-            <SignedOut>
-              <RedirectToSignIn />
-            </SignedOut>
-          </>
-        }
-      />
-
       <Route
         path="/interview"
         element={

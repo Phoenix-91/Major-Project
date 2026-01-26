@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import {
-    Brain, Zap, Shield, Clock, Mail, Calendar,
+    Brain, Zap, Shield, Clock, Video, CheckCircle,
     ArrowRight, Play, Check, ChevronRight, Star,
     Twitter, Github, Linkedin
 } from 'lucide-react';
@@ -19,33 +19,33 @@ export default function LandingPage() {
     const features = [
         {
             icon: Brain,
-            title: "AI-Powered Intelligence",
-            description: "Advanced AI that understands context and learns from your preferences to deliver personalized automation"
+            title: "AI-Powered Interview Analysis",
+            description: "Advanced AI that evaluates your responses and provides detailed feedback on communication, technical knowledge, and confidence"
         },
         {
             icon: Zap,
-            title: "Lightning Fast Automation",
-            description: "Execute complex workflows in seconds with our optimized AI engine and smart task processing"
+            title: "Real-Time Performance Feedback",
+            description: "Get instant analysis of your interview performance with actionable insights and improvement recommendations"
         },
         {
             icon: Shield,
-            title: "Enterprise Security",
-            description: "Bank-level encryption and security protocols to keep your data safe and private"
+            title: "Secure & Private",
+            description: "Your interview data is encrypted and secure. Practice confidently knowing your information is protected"
         },
         {
             icon: Clock,
-            title: "24/7 Availability",
-            description: "Your AI assistant never sleeps, working round the clock to keep you productive"
+            title: "Flexible Practice Sessions",
+            description: "Practice anytime, anywhere with our 10-minute interview sessions tailored to your job role and experience level"
         },
         {
-            icon: Mail,
-            title: "Smart Email Management",
-            description: "AI-powered email drafting, scheduling, and intelligent response suggestions"
+            icon: Video,
+            title: "Dual Camera Experience",
+            description: "Professional interview setup with AI interviewer and your live camera for realistic practice"
         },
         {
-            icon: Calendar,
-            title: "Intelligent Scheduling",
-            description: "Automatic conflict detection, smart meeting suggestions, and calendar optimization"
+            icon: CheckCircle,
+            title: "Comprehensive Scoring",
+            description: "Detailed performance metrics including communication, technical skills, confidence, problem-solving, and clarity"
         }
     ];
 
@@ -152,10 +152,10 @@ export default function LandingPage() {
                             </SignedOut>
                             <SignedIn>
                                 <button
-                                    onClick={() => navigate('/dashboard')}
+                                    onClick={() => navigate('/interview')}
                                     className="px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all"
                                 >
-                                    Dashboard
+                                    Start Interview
                                 </button>
                                 <UserButton afterSignOutUrl="/" />
                             </SignedIn>
@@ -198,10 +198,10 @@ export default function LandingPage() {
                             </SignedOut>
                             <SignedIn>
                                 <button
-                                    onClick={() => navigate('/dashboard')}
+                                    onClick={() => navigate('/interview')}
                                     className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2 font-semibold"
                                 >
-                                    Go to Dashboard
+                                    Start Interview
                                     <ArrowRight className="w-5 h-5" />
                                 </button>
                             </SignedIn>
@@ -320,10 +320,10 @@ export default function LandingPage() {
                         </SignedOut>
                         <SignedIn>
                             <button
-                                onClick={() => navigate('/dashboard')}
+                                onClick={() => navigate('/interview')}
                                 className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2 font-semibold mx-auto"
                             >
-                                Go to Dashboard
+                                Start Interview
                                 <ArrowRight className="w-5 h-5" />
                             </button>
                         </SignedIn>
