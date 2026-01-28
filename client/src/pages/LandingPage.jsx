@@ -55,27 +55,27 @@ export default function LandingPage() {
             price: "$0",
             period: "month",
             features: [
-                "5 AI commands per day",
-                "Basic email automation",
-                "Calendar integration",
-                "Community support",
-                "1 user"
+                "3 mock interviews per month",
+                "Basic AI feedback",
+                "Standard question bank",
+                "Performance scores",
+                "Community support"
             ]
         },
         {
             tier: "Pro",
-            price: "$29",
+            price: "$19",
             period: "month",
             popular: true,
             features: [
-                "Unlimited AI commands",
-                "Advanced email automation",
-                "Priority calendar scheduling",
-                "Interview simulator access",
+                "Unlimited mock interviews",
+                "Advanced AI feedback",
+                "Industry-specific questions",
+                "Detailed performance analytics",
+                "Video recording & playback",
                 "Priority support",
-                "Up to 5 users",
-                "Custom workflows",
-                "API access"
+                "Custom interview scenarios",
+                "Progress tracking"
             ]
         },
         {
@@ -84,37 +84,37 @@ export default function LandingPage() {
             period: null,
             features: [
                 "Everything in Pro",
-                "Dedicated AI instance",
-                "Custom integrations",
-                "24/7 phone support",
-                "Unlimited users",
-                "SLA guarantee",
-                "On-premise deployment",
-                "Custom training"
+                "Team accounts & analytics",
+                "Custom question banks",
+                "Dedicated account manager",
+                "24/7 priority support",
+                "White-label option",
+                "API access",
+                "Custom integrations"
             ]
         }
     ];
 
     const testimonials = [
         {
-            name: "Sarah Chen",
+            name: "Priya Sharma",
+            role: "Software Engineer",
+            company: "Google",
+            content: "I practiced 20+ mock interviews before my Google interview. The AI feedback helped me improve my communication and confidence. Got the offer!",
+            rating: 5
+        },
+        {
+            name: "David Kim",
             role: "Product Manager",
-            company: "TechCorp",
-            content: "This AI platform has transformed how our team works. We've saved 15+ hours per week on routine tasks and can focus on what really matters.",
+            company: "Microsoft",
+            content: "The real-time feedback is incredible. It helped me identify weak areas in my responses and improve them before the actual interview.",
             rating: 5
         },
         {
-            name: "Michael Rodriguez",
-            role: "CEO",
-            company: "StartupXYZ",
-            content: "The interview simulator alone is worth the subscription. Our hiring process is now 3x faster with better candidate quality.",
-            rating: 5
-        },
-        {
-            name: "Emily Watson",
-            role: "Operations Director",
-            company: "GlobalCo",
-            content: "Incredible automation capabilities. The AI understands context better than any tool we've used. Highly recommended!",
+            name: "Aisha Patel",
+            role: "Data Scientist",
+            company: "Amazon",
+            content: "Best interview prep tool I've used. The AI asks relevant questions and the scoring system helped me track my progress. Highly recommend!",
             rating: 5
         }
     ];
@@ -132,7 +132,7 @@ export default function LandingPage() {
                             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
                                 <Brain className="w-6 h-6 text-foreground" />
                             </div>
-                            <span className="text-xl font-bold">NEXUS.AI</span>
+                            <span className="text-xl font-bold">AI Interview Simulator</span>
                         </div>
 
                         <div className="hidden md:flex items-center gap-8">
@@ -174,17 +174,17 @@ export default function LandingPage() {
                         className="text-center mb-16"
                     >
                         <div className="inline-block mb-4 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-                            <span className="text-sm text-muted-foreground">✨ AI-Powered Automation Platform</span>
+                            <span className="text-sm text-muted-foreground">✨ AI-Powered Interview Practice</span>
                         </div>
 
                         <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                            Work Smarter with
+                            Ace Your Next
                             <br />
-                            AI Automation
+                            Job Interview
                         </h1>
 
                         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                            Your intelligent automation companion. Transform workflows with AI-powered efficiency.
+                            Practice with AI-powered mock interviews. Get real-time feedback and improve your interview skills.
                         </p>
 
                         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -222,16 +222,16 @@ export default function LandingPage() {
                         <GlassCard className="p-8">
                             <div className="grid md:grid-cols-3 gap-8">
                                 <div className="text-center">
-                                    <div className="text-4xl font-bold text-foreground mb-2">10k+</div>
-                                    <div className="text-muted-foreground">Active Users</div>
+                                    <div className="text-4xl font-bold text-foreground mb-2">5k+</div>
+                                    <div className="text-muted-foreground">Job Seekers Helped</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-4xl font-bold text-foreground mb-2">1M+</div>
-                                    <div className="text-muted-foreground">Tasks Automated</div>
+                                    <div className="text-4xl font-bold text-foreground mb-2">50k+</div>
+                                    <div className="text-muted-foreground">Mock Interviews Completed</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-4xl font-bold text-foreground mb-2">99.9%</div>
-                                    <div className="text-muted-foreground">Uptime</div>
+                                    <div className="text-4xl font-bold text-foreground mb-2">85%</div>
+                                    <div className="text-muted-foreground">Success Rate</div>
                                 </div>
                             </div>
                         </GlassCard>
@@ -248,8 +248,8 @@ export default function LandingPage() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Powerful Features</h2>
-                        <p className="text-xl text-muted-foreground">Everything you need to automate your workflow</p>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Powerful Interview Practice</h2>
+                        <p className="text-xl text-muted-foreground">Everything you need to ace your next interview</p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -269,8 +269,8 @@ export default function LandingPage() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
-                        <p className="text-xl text-muted-foreground">Choose the plan that fits your needs</p>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Practice Plans for Every Goal</h2>
+                        <p className="text-xl text-muted-foreground">Choose the plan that matches your interview preparation needs</p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -290,8 +290,8 @@ export default function LandingPage() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Teams Worldwide</h2>
-                        <p className="text-xl text-muted-foreground">See what our customers have to say</p>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Success Stories</h2>
+                        <p className="text-xl text-muted-foreground">See how we helped job seekers land their dream jobs</p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-8">
@@ -306,9 +306,9 @@ export default function LandingPage() {
             <section className="py-20 px-6">
                 <div className="max-w-4xl mx-auto">
                     <GlassCard className="text-center p-12">
-                        <h2 className="text-4xl font-bold mb-4">Ready to Transform Your Workflow?</h2>
+                        <h2 className="text-4xl font-bold mb-4">Ready to Ace Your Next Interview?</h2>
                         <p className="text-xl text-muted-foreground mb-8">
-                            Join thousands of professionals using AI to work smarter, not harder.
+                            Join thousands of job seekers who improved their interview skills with AI-powered practice.
                         </p>
                         <SignedOut>
                             <SignInButton mode="modal">
@@ -340,10 +340,10 @@ export default function LandingPage() {
                                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
                                     <Brain className="w-5 h-5 text-foreground" />
                                 </div>
-                                <span className="text-lg font-bold">NEXUS.AI</span>
+                                <span className="text-lg font-bold">AI Interview Simulator</span>
                             </div>
                             <p className="text-muted-foreground text-sm">
-                                Next-generation AI automation platform.
+                                AI-powered interview practice platform.
                             </p>
                         </div>
 
@@ -385,7 +385,7 @@ export default function LandingPage() {
 
                     <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
                         <p className="text-muted-foreground text-sm">
-                            © 2024 NEXUS.AI. All rights reserved.
+                            © 2026 AI Interview Simulator. All rights reserved.
                         </p>
                         <div className="flex gap-6 text-muted-foreground text-sm">
                             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
