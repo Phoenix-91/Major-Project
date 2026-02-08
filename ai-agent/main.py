@@ -51,6 +51,7 @@ class InterviewStartRequest(BaseModel):
     resume_text: str
     job_role: str
     difficulty: str = "medium"
+    interview_type: str = "general"  # hr, technical, behavioral, situational
 
 class InterviewResponseRequest(BaseModel):
     session_id: str
@@ -100,7 +101,8 @@ def start_interview(request: InterviewStartRequest):
         first_question = agent.start_interview(
             request.resume_text,
             request.job_role,
-            request.difficulty
+            request.difficulty,
+            request.interview_type
         )
         
         return {
@@ -146,6 +148,20 @@ def complete_interview(request: dict):
         return {
             "status": "success",
             "analytics": analytics
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/interview/session/{session_id}")
+def get_session_state(session_id: str):
+    """Get current session state and metrics"""
+    try:
+        agent = get_interview_agent(session_id)
+        state = agent.get_session_state()
+        
+        return {
+            "status": "success",
+            **state
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

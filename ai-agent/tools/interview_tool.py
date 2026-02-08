@@ -1,5 +1,5 @@
 from langchain.tools import tool
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from typing import List, Dict
 import os
@@ -10,36 +10,62 @@ def generate_interview_questions(
     resume_text: str,
     job_role: str,
     difficulty: str = "medium",
-    num_questions: int = 5
+    num_questions: int = 5,
+    resume_context: str = ""
 ) -> str:
     """
-    Generates interview questions based on resume and job role.
+    Generates interview questions STRICTLY based on resume content.
+    Questions explicitly reference specific projects, skills, and experiences from the resume.
     
     Args:
         resume_text: Parsed text from candidate's resume
         job_role: Target job role (e.g., "Software Engineer", "Data Scientist")
         difficulty: Question difficulty (easy, medium, hard)
         num_questions: Number of questions to generate
+        resume_context: Structured resume context (skills, projects, experience)
     """
-    llm = ChatGoogleGenerativeAI(
-        google_api_key=os.getenv("GEMINI_API_KEY"),
-        model="gemini-1.5-flash",
-        temperature=0.7
+    llm = ChatGroq(
+        model="llama3-70b-8192",
+        temperature=0.7,
+        api_key=os.getenv("GROQ_API_KEY")
     )
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", f"""You are an expert technical interviewer. Generate {num_questions} {difficulty} 
-        interview questions for a {job_role} position based on the candidate's resume.
+        interview questions for a {job_role} position STRICTLY based on the candidate's resume.
         
-        Questions should:
-        1. Be relevant to the candidate's experience
-        2. Test both technical and behavioral skills
-        3. Be appropriate for {difficulty} difficulty level
-        4. Include a mix of technical, problem-solving, and situational questions
+        CRITICAL RULES - FOLLOW EXACTLY:
+        1. ONLY ask about skills, technologies, projects, and experiences EXPLICITLY mentioned in the resume
+        2. ALWAYS reference specific items from the resume by name
+        3. DO NOT ask generic questions that could apply to anyone
+        4. Start questions with phrases like:
+           - "I see you worked on [PROJECT NAME]..."
+           - "You mentioned [TECHNOLOGY] in your resume..."
+           - "In your role at [COMPANY]..."
+           - "Your resume shows experience with [SKILL]..."
+        
+        Question Types to Include:
+        - Project Deep-Dives: Ask about specific projects, their architecture, challenges, your role
+        - Technology Probing: Ask how they used specific technologies they listed
+        - Experience-Based: Ask about responsibilities and achievements at companies they worked at
+        - Problem-Solving: Ask how they solved specific problems in their listed projects
+        
+        Resume Context:
+        {resume_context if resume_context else "See resume text below"}
+        
+        Example Good Questions:
+        - "I see you built an E-commerce Platform using React and Node.js. Can you walk me through the architecture and your specific contributions?"
+        - "You mentioned Docker in your skills. How did you use Docker in your [PROJECT NAME] project?"
+        - "At [COMPANY], you worked as a [ROLE]. Can you describe a challenging problem you solved there?"
+        
+        Example BAD Questions (DO NOT USE):
+        - "Tell me about yourself" (too generic)
+        - "What are your strengths?" (not resume-specific)
+        - "Where do you see yourself in 5 years?" (not technical or resume-based)
         
         Return ONLY a JSON array of questions with this format:
         [
-            {{"question": "...", "category": "technical/behavioral/situational", "difficulty": "..."}},
+            {{"question": "I see you worked on [SPECIFIC PROJECT]. Can you explain...", "category": "technical/behavioral/project", "difficulty": "{difficulty}"}},
             ...
         ]"""),
         ("user", f"Resume:\n{resume_text}\n\nJob Role: {job_role}")
@@ -66,10 +92,10 @@ def evaluate_interview_response(
         job_role: Target job role
         resume_context: Optional resume context for evaluation
     """
-    llm = ChatGoogleGenerativeAI(
-        google_api_key=os.getenv("GEMINI_API_KEY"),
-        model="gemini-1.5-flash",
-        temperature=0.3
+    llm = ChatGroq(
+        model="llama3-70b-8192",
+        temperature=0.3,
+        api_key=os.getenv("GROQ_API_KEY")
     )
     
     prompt = ChatPromptTemplate.from_messages([
@@ -117,10 +143,10 @@ def generate_interview_analytics(
         resume_text: Candidate's resume text
         job_role: Target job role
     """
-    llm = ChatGoogleGenerativeAI(
-        google_api_key=os.getenv("GEMINI_API_KEY"),
-        model="gemini-1.5-flash",
-        temperature=0.3
+    llm = ChatGroq(
+        model="llama3-70b-8192",
+        temperature=0.3,
+        api_key=os.getenv("GROQ_API_KEY")
     )
     
     prompt = ChatPromptTemplate.from_messages([
